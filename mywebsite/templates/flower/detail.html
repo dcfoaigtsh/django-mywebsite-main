@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}{{ flower.title }} - 詳細資料{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-light">
+                    <h2 class="card-title mb-0">{{ flower.title }}</h2>
+                </div>
+                
+                <!-- 添加圖片顯示區域 -->
+                <div class="text-center">
+                    {% if flower.image %}
+                    <img src="{{ flower.image.url }}" class="img-fluid" alt="{{ flower.title }}" style="max-height: 400px; width: 400px; object-fit: contain; padding: 15px;">
+                    {% else %}
+                    <div class="bg-light text-center py-5 my-3">
+                        <span class="text-muted fs-4">無圖片</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="card-body">
+                    <div class="mb-4">
+                        <span class="badge bg-success me-2">{{ flower.category }}</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4>描述</h4>
+                        <p>{{ flower.description }}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4>同類花卉</h4>
+                        <div class="mt-2">
+                            {% for c_flower in flower.category.flower_set.all %}
+                                {% if c_flower.id != flower.id %}
+                                <a href="{% url 'detail' c_flower.slug %}" class="badge bg-light text-dark text-decoration-none me-1 mb-1">{{ c_flower }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-white">
+                    <div class="d-flex justify-content-between">
+                        <a href="/flower/" class="btn btn-outline-secondary">返回列表</a>
+                        <div>
+                            <a href="/admin/flower/flower/{{ flower.id }}/change/" class="btn btn-outline-primary me-2">編輯</a>
+                            <a href="/admin/flower/flower/{{ flower.id }}/delete/" class="btn btn-outline-danger">刪除</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
