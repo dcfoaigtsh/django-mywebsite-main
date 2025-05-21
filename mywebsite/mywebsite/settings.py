@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cookiessessions',
     'flower',
     'news',
+    'captcha',
     
     # django-allauth相關，第三方認證登入
     # 需要先安裝 pip install django-allauth   pip install pyjwt

@@ -91,10 +91,13 @@ urlpatterns = [
     # https://127.0.0.1:8000/news/1
     path('news/detail/<int:detail_id>/', newsViews.detail, name='detail'),
     path('news/add/', newsViews.add_news, name='add_news'), 
-    # path('news/<int:news_id>/edit/', newsViews.edit_news, name='edit_news'),
+    path('news/<int:news_id>/edit/', newsViews.edit_news, name='edit_news'),
     path('news/<int:news_id>/delete/', newsViews.delete_news, name='delete_news'),
-    # path('news/<int:news_id>/reply/', newsViews.add_reply, name='add_reply'),
-    # path('newsreply/<int:reply_id>/delete/', newsViews.delete_reply, name='delete_reply'),
+    path('news/<int:news_id>/reply/', newsViews.add_reply, name='add_reply'),
+    path('news/reply/<int:reply_id>/delete/', newsViews.delete_reply, name='delete_reply'),
+    #captcha
+    path('captcha/', include('captcha.urls')),
+
 ]
 
 # 處理媒體檔案
